@@ -13,7 +13,6 @@ const expect = chai.expect;
 // see: https://github.com/chaijs/chai-http
 chai.use(chaiHttp);
 
-
 describe('Shopping List', function() {
 
   // Before our tests run, we activate the server. Our `runServer`
