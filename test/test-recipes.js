@@ -78,6 +78,22 @@ describe('Recipes', function() {
         expect(res.body).to.deep.equal(Object.assign(newItem, {id: res.body.id}));
       });
   });
+  it('should add a recipe on POST - Edge Case', function(){
+    const newItem = {name:'Hot Dog', 'ingredients':[]};
+    return chai.request(app)
+      .post('/recipes')
+      .send(newItem)
+      .then(function(res) {
+        expect(res).to.have.status(201);
+        expect(res).to.be.json;
+        expect(res.body).to.be.a('object');
+    expect(res.body).to.include.keys('name','ingredients', 'id');
+        expect(res.body.id).to.not.equal(null);
+        // response should be deep equal to `newItem` from above if we assign
+        // `id` to it from `res.body.id`
+        expect(res.body).to.deep.equal(Object.assign(newItem, {id: res.body.id}));
+      });
+  })
 
   // test strategy:
   //  1. initialize some update data (we won't have an `id` yet)
